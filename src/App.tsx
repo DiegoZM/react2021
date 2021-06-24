@@ -3,6 +3,8 @@ import React from 'react';
 import './App.css';
 import {Table, User} from './Components/Table';
 
+import { Form } from './Components/Form';
+
 type MyState = {
   users: User[];
 }
@@ -10,24 +12,7 @@ type MyState = {
 
 class  App extends React.Component<{}, MyState>  {
   state:MyState ={
-    users:[
-      {
-        name: 'Cloud',
-        job: 'Merc',
-      },
-      {
-        name: 'Barret',
-        job: 'Bar owner',
-      },
-      {
-        name: 'Tifa',
-        job: 'Bartender',
-      },
-      {
-        name: 'Aerith',
-        job: 'Flower girl',
-      },
-    ]
+    users:[]
   }
 
   removeUser = (index:any) => {
@@ -38,10 +23,15 @@ class  App extends React.Component<{}, MyState>  {
       }),
     })
   }
+
+  handleSubmit = (user:User) => {
+    this.setState({users:[...this.state.users, user]})
+  }
   render(){
     return (
       <div className="container">
-          <Table users={this.state.users} removeUser={this.removeUser}/>    
+          <Table users={this.state.users} removeUser={this.removeUser}/>
+          <Form handleSubmit={this.handleSubmit}/>    
       </div>
     );
   }
